@@ -69,7 +69,7 @@ namespace OlxApplication
             string str = Console.ReadLine();
             int idAd=int.Parse(str);
 
-            var ad=user.Announces.ElementAtOrDefault(idAd);
+            var ad=user.Announces.SingleOrDefault(i => i.Id == idAd);
 
             if (ad != null)
             {
@@ -96,7 +96,7 @@ namespace OlxApplication
             string str = Console.ReadLine();
             int idAd = int.Parse(str);
 
-            var ad = user.Announces.ElementAtOrDefault(idAd);
+            var ad = user.Announces.SingleOrDefault(i=>i.Id==idAd);
 
             if (ad != null)
             {

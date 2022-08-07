@@ -115,6 +115,51 @@ namespace OlxApplication
             }
         }
 
+        static void AddAddress()
+        {
+            Console.WriteLine("Insert the country.");
+
+            string country = Console.ReadLine();
+
+            Console.WriteLine("Insert the town.");
+
+            string town = Console.ReadLine();
+
+            Console.WriteLine("Insert the street.");
+
+            string street = Console.ReadLine();
+
+            Console.WriteLine("Insert the number of street");
+
+            string numberOfStreet = Console.ReadLine();
+
+
+            using var dbContext = new OlxDbContext();
+
+            if(country!=null && town!=null && street!=null && numberOfStreet != null)
+            {
+                var adr = new Address { UserId = _userId, Country = country, Town = town, Street = street, NumberStreet = int.Parse(numberOfStreet) };
+                dbContext.Adr.Add(adr);
+                dbContext.SaveChanges();
+            }
+        }
+
+        static void ReadAddress()
+        {
+            using var dbContext= new OlxDbContext();
+            var adr=dbContext.Adr.Where(u=>u.UserId==_userId).FirstOrDefault();
+            if (adr != null)
+            {
+                Console.WriteLine("Your address is: ");
+                Console.WriteLine($"Country: {adr.Country}, Town:{adr.Town}, Street:{adr.Street}, Number:{adr.NumberStreet}");
+            }
+            else
+            {
+                Console.WriteLine("Your address is empty!");
+            }
+            
+        }
+
         static void Menu()
         {
             Console.WriteLine("To log in, enter 1.");
@@ -122,7 +167,9 @@ namespace OlxApplication
             Console.WriteLine("To add a new ad enter 3.");
             Console.WriteLine("To modify an ad enter 4.");
             Console.WriteLine("To delete an ad enter 5");
-            Console.WriteLine("To stop the application press 6.\n");
+            Console.WriteLine("To insert the address enter 6");
+            Console.WriteLine("To read the address enter 7");
+            Console.WriteLine("To stop the application press 8.\n");
         }
 
         static void FunctionalityMenu()
@@ -152,11 +199,17 @@ namespace OlxApplication
                         DeleteAd();
                         break;
                     case 6:
+                        AddAddress();
+                        break;
+                    case 7:
+                        ReadAddress();
+                        break;
+                    case 8:
                         Console.WriteLine("The application has stopped\n");
                         break;
                 }
 
-            } while (var != 6);
+            } while (var != 8);
         }
 
         static void Main(string[] args)

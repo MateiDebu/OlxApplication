@@ -11,6 +11,6 @@ namespace OlxApplicationDB.Models
         [MaxLength(20)]
         public string NameAd { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } 
     }
 }

@@ -117,31 +117,40 @@ namespace OlxApplication
 
         static void AddAddress()
         {
-            Console.WriteLine("Insert the country.");
-
-            string country = Console.ReadLine();
-
-            Console.WriteLine("Insert the town.");
-
-            string town = Console.ReadLine();
-
-            Console.WriteLine("Insert the street.");
-
-            string street = Console.ReadLine();
-
-            Console.WriteLine("Insert the number of street");
-
-            string numberOfStreet = Console.ReadLine();
-
-
+           
             using var dbContext = new OlxDbContext();
+            var adr = dbContext.Adr.Where(u => u.UserId == _userId).FirstOrDefault();
 
-            if(country!=null && town!=null && street!=null && numberOfStreet != null)
+            if (adr == null)
             {
-                var adr = new Address { UserId = _userId, Country = country, Town = town, Street = street, NumberStreet = int.Parse(numberOfStreet) };
-                dbContext.Adr.Add(adr);
-                dbContext.SaveChanges();
+                Console.WriteLine("Insert the country.");
+
+                string country = Console.ReadLine();
+
+                Console.WriteLine("Insert the town.");
+
+                string town = Console.ReadLine();
+
+                Console.WriteLine("Insert the street.");
+
+                string street = Console.ReadLine();
+
+                Console.WriteLine("Insert the number of street");
+
+                string numberOfStreet = Console.ReadLine();
+
+                if (country != null && town != null && street != null && numberOfStreet != null)
+                {
+                    var address = new Address { UserId = _userId, Country = country, Town = town, Street = street, NumberStreet = int.Parse(numberOfStreet) };
+                    dbContext.Adr.Add(address);
+                    dbContext.SaveChanges();
+                }
             }
+            else
+            {
+                Console.WriteLine("You already have the address!");
+            }
+            
         }
 
         static void ReadAddress()
@@ -162,7 +171,6 @@ namespace OlxApplication
 
         static void Menu()
         {
-            Console.WriteLine("To log in, enter 1.");
             Console.WriteLine("To read the announcement enter 2.");
             Console.WriteLine("To add a new ad enter 3.");
             Console.WriteLine("To modify an ad enter 4.");
@@ -174,6 +182,7 @@ namespace OlxApplication
 
         static void FunctionalityMenu()
         {
+            LogIn();
             int var;
             do
             {
@@ -183,9 +192,6 @@ namespace OlxApplication
                 var = int.Parse(str);
                 switch (var)
                 {
-                    case 1:
-                        LogIn();
-                        break;
                     case 2:
                         ReadAnnouncement();
                         break;

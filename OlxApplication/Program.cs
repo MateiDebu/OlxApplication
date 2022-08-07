@@ -40,20 +40,25 @@ namespace OlxApplication
 
             foreach(var ad in user.Announces)
             {
-                Console.WriteLine($"Ad id={ad.Id} description={ad.Description}");
+                Console.WriteLine($"Ad id={ad.Id} name={ad.NameAd} description={ad.Description}");
             }
         }
 
         static void AddAd()
         {
             using var dbContext = new OlxDbContext();
+
+            Console.WriteLine("Insert the name of ad.");
+
+            string nameAd = Console.ReadLine();
+
             Console.WriteLine("Insert the ad.");
 
             string descriptionAd=Console.ReadLine();
 
-            if (descriptionAd != null)
+            if (descriptionAd != null && nameAd!=null)
             {
-                var ad = new Ad {UserId=_userId,Description = descriptionAd }; 
+                var ad = new Ad {UserId=_userId,Description = descriptionAd,NameAd=nameAd }; 
                 dbContext.Ads.Add(ad);
                 dbContext.SaveChanges();
             }

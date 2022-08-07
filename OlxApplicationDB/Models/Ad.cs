@@ -1,4 +1,6 @@
-﻿namespace OlxApplicationDB.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OlxApplicationDB.Models
 {
     public class Ad
     {

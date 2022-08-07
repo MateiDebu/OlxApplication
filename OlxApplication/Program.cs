@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OlxApplicationDB.Models;
-using OlxApplicationDB.OlxDbContext;
+using OlxApplicationDB.DbContextOlx;
 
 namespace OlxApplication
 {

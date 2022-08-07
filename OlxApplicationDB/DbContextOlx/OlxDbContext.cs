@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OlxApplicationDB.Models;
 
-namespace OlxApplicationDB.OlxDbContext
+namespace OlxApplicationDB.DbContextOlx
 {
     public class OlxDbContext : DbContext
     {
